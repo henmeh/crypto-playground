@@ -1,8 +1,10 @@
 def ggT(number1, number2):
-    if type(number1) is int and type(number2) is int:
+    if number1 <= number2:
+        raise ValueError("First number must be bigger than second number")
+    elif not isinstance(number1, int) and isinstance(number2, int):
+        raise TypeError("Only integers are allowed")
+    else:
         remainder = number1 % number2
         if remainder == 0:
             return number2
         return ggT(number2, remainder)
-    else:
-        raise TypeError("Only integers are allowed")
