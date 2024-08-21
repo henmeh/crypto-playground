@@ -1,7 +1,7 @@
 import unittest
 import math
 import random
-from helperfunctions.helper import ggT, eea, mod_inverse
+from helperfunctions.helper import ggT, eea, mod_inverse, miller_rabin_test
 
 
 class Test(unittest.TestCase):
@@ -57,6 +57,17 @@ class Test(unittest.TestCase):
             mod_inverse(4.5, 3)
             mod_inverse(4, 3.5)
             mod_inverse(4.5, 3.5)
+    
+
+    def test_miller_rabin_test(self):
+        prime_numbers = [3083,3019,7919,7573, 647, 263, 179, 5, 2, 3, 10888869450418352160768000001, 265252859812191058636308479999999, 263130836933693530167218012159999999, 8683317618811886495518194401279999999, 35742549198872617291353508656626642567, 359334085968622831041960188598043661065388726959079837]
+        non_prime_numbers = [7865, 87654, 12345]
+
+        for number in prime_numbers:
+            self.assertTrue(miller_rabin_test(number))
+        
+        for number in non_prime_numbers:
+            self.assertFalse(miller_rabin_test(number))
         
 
 if __name__ == '__main__':
