@@ -1,4 +1,7 @@
 import random
+import math
+from sympy import factorint  # SymPy's optimized prime factorization
+
 
 def ggT(number1, number2):
     if not isinstance(number1, int) or not isinstance(number2, int):
@@ -66,3 +69,26 @@ def miller_rabin_test(n, k=5):
         else:
             return False
     return True
+
+
+def pollard_rho(n):
+    """Pollard's rho algorithm to find a non-trivial factor of n."""
+    def f(x, n):
+        return (x*x + 1) % n
+    
+    if n % 2 == 0:
+        return 2
+    x, y, d = 2, 2, 1
+    while d == 1:
+        x = f(x, n)
+        y = f(f(y, n), n)
+        d = ggT(abs(x - y), n)
+        if d == n:
+            return pollard_rho(n)
+    return d
+
+
+def prime_factors(n):
+    """Return the set of prime factors of n using SymPy for efficiency."""
+    factors = factorint(n)  # Returns a dictionary {factor: exponent}
+    return set(factors.keys())
