@@ -37,8 +37,9 @@ class DHKE:
         
         return None
     
+    
     def get_keys(self):
-        private_key = random.randint(1, self.p)
+        private_key = random.randint(2, self.p - 2)
         public_key = pow(self.generator, private_key, self.p)
 
         return {"private_key": private_key, "public_key": public_key}

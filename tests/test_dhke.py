@@ -6,8 +6,8 @@ class Test(unittest.TestCase):
 
     def test_equal_session_key(self):
         for _ in range(0, 500):
-            a = DHKE(bytesize=8)
-            b = DHKE(prime=a.p, generator=a.generator)
+            a = DHKE(bytesize = 8)
+            b = DHKE(prime = a.p, generator = a.generator)
             a_keys = a.get_keys()
             b_keys = b.get_keys()
 

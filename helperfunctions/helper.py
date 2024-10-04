@@ -71,23 +71,6 @@ def miller_rabin_test(n, k=5):
     return True
 
 
-def pollard_rho(n):
-    """Pollard's rho algorithm to find a non-trivial factor of n."""
-    def f(x, n):
-        return (x*x + 1) % n
-    
-    if n % 2 == 0:
-        return 2
-    x, y, d = 2, 2, 1
-    while d == 1:
-        x = f(x, n)
-        y = f(f(y, n), n)
-        d = ggT(abs(x - y), n)
-        if d == n:
-            return pollard_rho(n)
-    return d
-
-
 def prime_factors(n):
     """Return the set of prime factors of n using SymPy for efficiency."""
     factors = factorint(n)  # Returns a dictionary {factor: exponent}
