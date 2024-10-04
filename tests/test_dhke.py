@@ -12,3 +12,7 @@ class Test(unittest.TestCase):
             b_keys = b.get_keys()
 
             self.assertEqual(a.get_session_key(a_keys["private_key"], b_keys["public_key"]), b.get_session_key(b_keys["private_key"], a_keys["public_key"]))
+
+
+if __name__ == '__main__':
+    unittest.main()
