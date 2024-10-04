@@ -30,9 +30,15 @@ class ELGAMAL:
 
     def decrypt(self, chiffre: bytes, key_public_encryption: int):
         chiffre_int = int.from_bytes(chiffre, "big")
-        key_public_ephemeral = pow(key_public_encryption, self.private_key, self.p)
         
-        inverse = mod_inverse(key_public_ephemeral, self.p)
+        """
+        Bei Aussnutzung des kleine Fermat kann auf EEA zur Bestimmung der Inversen von key_public_ephemeral
+        verzichtet werden
+        """
+        #key_public_ephemeral = pow(key_public_encryption, self.private_key, self.p)
+        #inverse = mod_inverse(key_public_ephemeral, self.p)
+
+        inverse = pow(key_public_encryption, self.p-1-self.private_key, self.p)
 
         decrypted_int = (chiffre_int * inverse) % self.p
 
