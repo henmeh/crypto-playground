@@ -3,7 +3,7 @@ from rsa import RSA
 
 class Test(unittest.TestCase):
 
-    def test_rsa(self):
+    def test_rsa_encryption(self):
         messages = [
             "Hallo Henning",
             "Hallo Nadine",
@@ -18,6 +18,15 @@ class Test(unittest.TestCase):
             self.assertEqual(decrypted_message, message, f"Should be {message}")
 
 
+    def test_rsa_signature(self):
+        test_cases = [("Hallo Henning", "Hallo Henning", True),
+                      ("Hallo Henning", "allo Henning", False),
+                     ]
+
+        for test_case in test_cases:
+            a = RSA()
+            signature = a.sign(test_case[0])
+            self.assertEqual(a.verify(test_case[1], signature), test_case[2])
 
 
 if __name__ == '__main__':

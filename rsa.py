@@ -23,8 +23,10 @@ class RSA:
 
         self.d = mod_inverse(self.e, self.phi)
 
+
     def get_keys(self):
         return {"private_key": (self.d, self.n), "public_key": (self.e, self.n)}
+
 
     def encrypt(self, message: str):
         message_bytes = message.encode('utf-8')
@@ -35,6 +37,7 @@ class RSA:
         byte_length = (self.n.bit_length() + 7) // 8
         return chiffre.to_bytes(byte_length, 'big')
 
+
     def decrypt(self, chiffre: bytes):
         message_int = int.from_bytes(chiffre, 'big')
         decrypted_int = pow(message_int, self.d, self.n)
@@ -43,3 +46,21 @@ class RSA:
         decrypted_bytes = decrypted_int.to_bytes(byte_length, 'big')
         
         return decrypted_bytes.decode('utf-8')
+    
+
+    def sign(self, message: str):
+        message_bytes = message.encode('utf-8')
+        
+        message_int = int.from_bytes(message_bytes, 'big')
+        signature = pow(message_int, self.d, self.n)
+        
+        byte_length = (self.n.bit_length() + 7) // 8
+        return signature.to_bytes(byte_length, 'big')
+    
+
+    def verify(self, message: str, signature: bytes):
+        message_bytes = message.encode('utf-8')
+        message_int = int.from_bytes(message_bytes, "big")
+        signature_int = int.from_bytes(signature, "big")
+
+        return pow(signature_int, self.e, self.n) == message_int
