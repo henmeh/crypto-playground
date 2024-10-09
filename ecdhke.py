@@ -1,4 +1,3 @@
-from helperfunctions.helper import ggT, miller_rabin_test, prime_factors
 from helperfunctions.ec_point import ECPoint, FieldElement
 
 import random
