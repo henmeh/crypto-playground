@@ -19,6 +19,7 @@ class ECDHKE:
             self.a,
             self.b,
         )
+
     
     def get_keys(self):
         private_key = random.randint(2, self.p - 2)

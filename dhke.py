@@ -3,6 +3,7 @@ import random
 
 class DHKE:
     def __init__(self, prime=None, generator=None, bytesize=8):
+        
         if prime is not None and generator is not None:
             self.p = prime
             self.generator = generator
