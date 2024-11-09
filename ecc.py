@@ -22,18 +22,18 @@ class ECC:
         )
 
     
-    def get_keys(self):
+    def get_keys(self)-> dict:
         private_key = random.randint(2, self.p - 2)
         public_key = private_key * self.G
 
         return {"private_key": private_key, "public_key": public_key}
     
 
-    def get_session_key(self, private_key, public_key):
+    def get_session_key(self, private_key: int, public_key: ECPoint) -> ECPoint:
         return private_key * public_key
 
 
-    def sign(self, message: str, private_key:int):
+    def sign(self, message: str, private_key: int) -> tuple:
         message_bytes = message.encode('utf-8')
         message_int = int.from_bytes(message_bytes, 'big')
         
@@ -45,7 +45,7 @@ class ECC:
         return (r, s)
     
 
-    def verify(self, message: str, public_key: "ECPoint", signature: tuple):
+    def verify(self, message: str, public_key: ECPoint, signature: tuple) -> bool:
         message_bytes = message.encode('utf-8')
         message_int = int.from_bytes(message_bytes, 'big')
         
