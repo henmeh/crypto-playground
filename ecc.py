@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class ECC:
     def __init__(self):
-        self.p_only_for_plotting = 5120
+        self.p_only_for_plotting = 17
         self.a_only_for_plotting = FieldElement(0, self.p_only_for_plotting)
         self.b_only_for_plotting = FieldElement(7, self.p_only_for_plotting)
 
@@ -83,5 +83,3 @@ class ECC:
         plt.title(f'Elliptic Curve: y^2 = x^3 + {self.a_only_for_plotting.num}x + {self.b_only_for_plotting.num} over Finite Field F_{self.p_only_for_plotting}')
         plt.grid(True)
         plt.show()
-
-ECC().plot_ecc_curve()
