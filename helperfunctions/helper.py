@@ -1,4 +1,5 @@
 import random
+import hashlib
 import math
 from sympy import factorint  # SymPy's optimized prime factorization
 
@@ -75,3 +76,8 @@ def prime_factors(n):
     """Return the set of prime factors of n using SymPy for efficiency."""
     factors = factorint(n)  # Returns a dictionary {factor: exponent}
     return set(factors.keys())
+
+
+def sha256(data: bytes) -> bytes:
+
+    return hashlib.sha256(data).digest()
