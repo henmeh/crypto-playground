@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
                       ("Hallo Henning", "Hallo Henning", private_key, 2*public_key, False),
                      ]
 
-        for test_case in test_cases:            
+        for test_case in test_cases:
             signature = a.sign(test_case[0], test_case[2])
             self.assertEqual(a.verify(test_case[1], test_case[3], signature), test_case[4])
     
@@ -43,12 +43,12 @@ class Test(unittest.TestCase):
                       ("Hallo Henning", "Hallo Henning", private_key, 2*public_key, False),
                      ]
 
-        for test_case in test_cases:            
+        for test_case in test_cases:
             signature = a.sign(test_case[0], test_case[2])
             signature_malleability = (signature[0], -1*signature[1])
             self.assertEqual(a.verify(test_case[1], test_case[3], signature_malleability), test_case[4])
 
-        for test_case in test_cases:            
+        for test_case in test_cases:
             signature = a.sign(test_case[0], test_case[2])
             signature_s = str(signature[1])
             signature_s_malleability = int(f"0{signature_s}")
